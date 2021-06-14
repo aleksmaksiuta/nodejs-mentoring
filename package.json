@@ -1,0 +1,58 @@
+{
+  "name": "nodejs_mentoring",
+  "version": "1.0.0",
+  "main": "index.js",
+  "private": true,
+  "scripts": {
+    "module1:task1": "nodemon module_1/task_1.js",
+    "module1:task2": "nodemon module_1/task_2.js",
+    "module1:task3": "babel module_1/task_3 --out-dir dist/module1 --source-maps inline && nodemon ./dist/module1/task_2.js",
+    "db:init": "node src/models/init.js --db-clean",
+    "start": "nodemon src/app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Aleks Maksiuta",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@babel/cli": "^7.13.0",
+    "@babel/core": "^7.13.8",
+    "@babel/eslint-parser": "^7.13.10",
+    "@babel/node": "^7.13.0",
+    "@babel/plugin-transform-typescript": "^7.13.0",
+    "@babel/preset-env": "^7.13.9",
+    "@babel/preset-typescript": "^7.13.0",
+    "@types/express": "^4.17.11",
+    "@types/joi": "^17.2.3",
+    "@types/uuid": "^8.3.0",
+    "@typescript-eslint/eslint-plugin": "^4.19.0",
+    "@typescript-eslint/parser": "^4.19.0",
+    "eslint": "^7.23.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.22.1",
+    "nodemon": "^2.0.7",
+    "tsc-watch": "^4.2.9"
+  },
+  "dependencies": {
+    "@hapi/joi": "^17.1.1",
+    "cors": "^2.8.5",
+    "csvtojson": "^2.0.10",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "express-joi-validation": "^5.0.0",
+    "express-winston": "^4.1.0",
+    "joi": "^17.4.0",
+    "joi-extract-type": "^15.0.8",
+    "jsonwebtoken": "^8.5.1",
+    "pg": "^8.6.0",
+    "pg-hstore": "^2.3.3",
+    "sequelize": "^6.6.2",
+    "typescript": "^4.2.3",
+    "uuid": "^8.3.2",
+    "winston": "^3.3.3"
+  },
+  "eslintIgnore": [
+    "./dist",
+    "./module_1"
+  ]
+}
