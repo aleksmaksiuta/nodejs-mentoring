@@ -41,7 +41,7 @@ const updateUser = async (user) => {
     throw new BaseError('Not Found', HttpStatusCode.NOT_FOUND, 'User not found');
   }
 
-  const existingUser = UserRepo.getOne({
+  const existingUser = await UserRepo.getOne({
     login: user.login,
   });
 
