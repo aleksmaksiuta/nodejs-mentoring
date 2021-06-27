@@ -31,7 +31,7 @@ const updateGroup = async (group) => {
     throw new BaseError('Not Found', HttpStatusCode.NOT_FOUND, 'Group not found');
   }
 
-  const existingGroup = GroupRepo.getOne({
+  const existingGroup = await GroupRepo.getOne({
     name: group.name,
   });
 
