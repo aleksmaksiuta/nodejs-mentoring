@@ -3,13 +3,13 @@ const app = require('../../app');
 const HttpStatusCode = require('../../constants/httpStatusCodes');
 const PERMISSIONS = require('../../constants/permissions');
 const UserService = require('../../services/UserService');
-const { sequelize } = require('../../models/index');
+const { sequelize, sync } = require('../../models/index');
 
 describe('Groups controller',  () => {
     const auth = {};
 
     beforeAll(async () => {
-        await sequelize.sync({ force: true });
+        await sync({ force: true });
 
         const testUser = {
             login: 'majorTom',
@@ -107,5 +107,9 @@ describe('Groups controller',  () => {
 
             expect(res.statusCode).toBe(HttpStatusCode.OK);
         });
+    });
+
+    afterAll(async () => {
+        await sequelize.close();
     });
 });

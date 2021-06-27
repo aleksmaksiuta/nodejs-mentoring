@@ -2,14 +2,14 @@ const request = require('supertest');
 const app = require('../../app');
 const HttpStatusCode = require('../../constants/httpStatusCodes');
 const UserService = require('../../services/UserService');
-const { sequelize } = require('../../models/index');
+const { sequelize, sync } = require('../../models/index');
 
 
 describe('Users controller', () => {
     const auth = {};
 
     beforeAll(async () => {
-        await sequelize.sync({ force: true });
+        await sync({ force: true });
 
         const testUser = {
             login: 'majorTom',
