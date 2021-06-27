@@ -1,5 +1,5 @@
 const Sequelize = require('sequelize');
-const {UserGroup, sequelize} = require('../models/index');
+const {UserGroups, sequelize} = require('../models/index');
 const {Group} = require('../models/index');
 
 const getOne = (params = {}) => Group.findOne({
@@ -24,7 +24,7 @@ const remove = (id) => Group.destroy({
 const addUsersToGroup = async (groupId, userIds) => sequelize.transaction(
   {isolationLevel: Sequelize.Transaction.ISOLATION_LEVELS.SERIALIZABLE},
   transaction => Promise.all(
-    userIds.map((userId) => UserGroup.create({
+    userIds.map((userId) => UserGroups.create({
       UserId: userId,
       GroupId: groupId,
     }, { transaction })),

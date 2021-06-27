@@ -1,6 +1,6 @@
 const {DataTypes} = require('sequelize');
 const User = require('./user');
-const Group = require('./user');
+const Group = require('./group');
 
 module.exports = {
   UserId: {

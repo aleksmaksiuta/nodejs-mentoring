@@ -7,13 +7,22 @@ const useForceClean = argv.includes('--db-clean');
 const PERMISSIONS = require('../constants/permissions');
 const UserModel = require( './user');
 const GroupModel = require( './group');
-const UserGroupModel = require( './userGroup');
+const UserGroupsModel = require( './userGroups');
 
-const User = sequelize.define('Users', UserModel);
-const Group = sequelize.define('Groups', GroupModel);
-const UserGroup = sequelize.define('UserGroup', UserGroupModel, { timestamps: false, tableName: 'UserGroup' });
-User.belongsToMany(Group, { through: UserGroup });
-Group.belongsToMany(User, { through: UserGroup });
+const User = sequelize.define('Users', UserModel, {
+  timestamps: false,
+  freezeTableName: true,
+});
+const Group = sequelize.define('Groups', GroupModel, {
+  timestamps: false,
+  freezeTableName: true,
+});
+const UserGroups = sequelize.define('UserGroups', UserGroupsModel, {
+  timestamps: false,
+  freezeTableName: true,
+});
+User.belongsToMany(Group, { through: UserGroups });
+Group.belongsToMany(User, { through: UserGroups });
 
 const sync = async () => {
   await sequelize.sync({ force: true });

@@ -4,21 +4,17 @@ const HttpStatusCode = require('../constants/httpStatusCodes');
 const config = require('../config');
 
 const auth = (req, __, next) => {
-  if (config.env === 'test') {
+  const token = req.headers['x-access-token'];
+
+  if (!token) {
+    throw new ForbiddenError('Not authorized', HttpStatusCode.UNAUTHORIZED, 'Not authorized');
+  }
+
+  try {
+    jwt.verify(token, config.secret);
     next();
-  } else {
-    const token = req.headers['x-access-token'];
-
-    if (!token) {
-      throw new ForbiddenError('Not authorized', HttpStatusCode.UNAUTHORIZED, 'Not authorized');
-    }
-
-    try {
-      jwt.verify(token, config.secret);
-      next();
-    } catch (e) {
-      throw new ForbiddenError('Token not valid', HttpStatusCode.FORBIDDEN, 'Expired');
-    }
+  } catch (e) {
+    throw new ForbiddenError('Token not valid', HttpStatusCode.FORBIDDEN, 'Expired');
   }
 };
 
